@@ -1,9 +1,8 @@
 # CalendarDateRangePickerViewController
 
-[![CI Status](http://img.shields.io/travis/miraan/CalendarDateRangePickerViewController.svg?style=flat)](https://travis-ci.org/miraan/CalendarDateRangePickerViewController)
-[![Version](https://img.shields.io/cocoapods/v/CalendarDateRangePickerViewController.svg?style=flat)](http://cocoapods.org/pods/CalendarDateRangePickerViewController)
-[![License](https://img.shields.io/cocoapods/l/CalendarDateRangePickerViewController.svg?style=flat)](http://cocoapods.org/pods/CalendarDateRangePickerViewController)
-[![Platform](https://img.shields.io/cocoapods/p/CalendarDateRangePickerViewController.svg?style=flat)](http://cocoapods.org/pods/CalendarDateRangePickerViewController)
+[![Version](https://img.shields.io/cocoapods/v/CalendarDateRangePickerViewController.svg?style=flat)](http://cocoapods.org/pods/CalendarDateRangePicker)
+[![License](https://img.shields.io/cocoapods/l/CalendarDateRangePickerViewController.svg?style=flat)](http://cocoapods.org/pods/CalendarDateRangePicker)
+[![Platform](https://img.shields.io/cocoapods/p/CalendarDateRangePickerViewController.svg?style=flat)](http://cocoapods.org/pods/CalendarDateRangePicker)
 
 ## Example
 
@@ -11,7 +10,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 Here's what it looks like:
 
-![alt text](https://github.com/miraan/CalendarDateRangePickerViewController/blob/master/recording.gif "Select start and end dates easily.")
+![alt text](https://github.com/Ljuka/CalendarDateRangePickerViewController/blob/master/recording.gif "Select start and end dates easily.")
 
 ## Usage
 
@@ -50,12 +49,12 @@ CalendarDateRangePickerViewController is available through [CocoaPods](http://co
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'CalendarDateRangePickerViewController'
+pod 'CalendarDateRangePicker'
 ```
 
 ## Author
 
-miraan, miraan@triprapp.com
+Ljuka, ljubom94@gmail.com
 
 ## License
 
