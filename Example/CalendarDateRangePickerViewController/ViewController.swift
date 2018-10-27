@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CalendarDateRangePickerViewController
+import CalendarDateRangePicker
 
 class ViewController: UIViewController {
 
