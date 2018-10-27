@@ -58,7 +58,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         collectionView?.backgroundColor = UIColor.white
         
         collectionView?.register(CalendarDateRangePickerCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-        collectionView?.register(CalendarDateRangePickerHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        collectionView?.register(CalendarDateRangePickerHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         collectionView?.contentInset = collectionViewInsets
         
         if minimumDate == nil {
@@ -162,7 +162,7 @@ extension CalendarDateRangePickerViewController {
     
     override public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionView.elementKindSectionHeader:
+        case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! CalendarDateRangePickerHeaderView
             headerView.label.text = getMonthLabel(date: getFirstDateForSection(section: indexPath.section))
             headerView.font = headerFont

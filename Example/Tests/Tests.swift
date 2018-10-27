@@ -1,6 +1,6 @@
 import UIKit
 import XCTest
-import CalendarDateRangePicker 
+import Pods_CalendarDateRangePickerViewController_Example
 
 class Tests: XCTestCase {
     
