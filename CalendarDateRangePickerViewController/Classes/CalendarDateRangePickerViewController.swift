@@ -123,11 +123,6 @@ extension CalendarDateRangePickerViewController {
             cell.date = date
             cell.label.text = "\(dayOfMonth)"
 
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let datePreFormatted = dateFormatter.string(from: date)
-            let dateFormatted = dateFormatter.date(from: datePreFormatted)
-         
             if disabledDates != nil{
                 if (disabledDates?.contains(cell.date!))!{
                     cell.disable()
