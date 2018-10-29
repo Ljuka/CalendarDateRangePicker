@@ -306,16 +306,16 @@ extension CalendarDateRangePickerViewController {
         
         while !(index == endDateCellIndex.row && section == endDateCellIndex.section){
             currentIndexPath = IndexPath(row: index, section: section)
-            cell = collectionView?.cellForItem(at: currentIndexPath) as! CalendarDateRangePickerCell
-            if cell == nil{
+            cell = collectionView?.cellForItem(at: currentIndexPath) as? CalendarDateRangePickerCell
+            if cell?.date == nil{
                 section = section + 1
                 let blankItems = getWeekday(date: getFirstDateForSection(section: section)) - 1
-                index = blankItems + 1
+                index = 7 + blankItems
                 currentIndexPath = IndexPath(row: index, section: section)
-                cell = collectionView?.cellForItem(at: currentIndexPath) as! CalendarDateRangePickerCell
+                cell = collectionView?.cellForItem(at: currentIndexPath) as? CalendarDateRangePickerCell
             }
             
-            if (disabledDates?.contains((cell?.date)!))!{
+            if cell != nil && (disabledDates?.contains((cell!.date)!))! {
                 return true
             }
             index = index + 1
