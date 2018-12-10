@@ -93,7 +93,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
     }
     
     @objc func highlightLeft() {
-        // This is used instead of highlight() when we need to highlight the cell with a rounded edge on the right
+        // This is used instead of highlight() when we need to highlight the cell with a rounded edge on the right.
         let width = self.frame.size.width
         let height = self.frame.size.height
         halfBackgroundView = UIView(frame: CGRect(x: 0, y: 0, width: width / 2, height: height))
