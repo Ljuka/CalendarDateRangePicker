@@ -2,7 +2,7 @@
 //  CalendarDateRangePickerHeaderView.swift
 //  CalendarDateRangePickerViewController
 //
-//  Created by Miraan on 15/10/2017.
+//  Created by Ljuka on 15/10/2017.
 //  Copyright © 2017 Miraan. All rights reserved.
 //
 

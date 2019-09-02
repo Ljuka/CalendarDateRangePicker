@@ -48,6 +48,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     @objc public var highlightedLabelColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
     @objc public var titleText = "Select Dates"
 
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,7 +57,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         collectionView?.dataSource = self
         collectionView?.delegate = self
         collectionView?.backgroundColor = UIColor.white
-
+        
         collectionView?.register(CalendarDateRangePickerCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         collectionView?.register(CalendarDateRangePickerHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         collectionView?.contentInset = collectionViewInsets
@@ -140,9 +141,39 @@ extension CalendarDateRangePickerViewController {
             if selectedStartDate != nil && selectedEndDate != nil && isBefore(dateA: selectedStartDate!, dateB: date) && isBefore(dateA: date, dateB: selectedEndDate!) {
                 // Cell falls within selected range
                 if dayOfMonth == 1 {
-                    cell.highlightRight()
+                    if #available(iOS 9.0, *) {
+                        if UIView.appearance().semanticContentAttribute == .forceRightToLeft {
+                            cell.highlightLeft()
+                        }
+                        else{
+                            cell.highlightRight()
+                        }
+                    } else {
+                        // Use the previous technique
+                        if UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft {
+                            cell.highlightLeft()
+                        }
+                        else{
+                            cell.highlightRight()
+                        }
+                    }
                 } else if dayOfMonth == getNumberOfDaysInMonth(date: date) {
-                    cell.highlightLeft()
+                    if #available(iOS 9.0, *) {
+                        if UIView.appearance().semanticContentAttribute == .forceRightToLeft{
+                            cell.highlightRight()
+                        }
+                        else{
+                            cell.highlightLeft()
+                        }
+                    } else {
+                        // Use the previous technique
+                        if UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft {
+                            cell.highlightRight()
+                        }
+                        else{
+                            cell.highlightLeft()
+                        }
+                    }
                 } else {
                     cell.highlight()
                 }
@@ -150,11 +181,41 @@ extension CalendarDateRangePickerViewController {
                 // Cell is selected start date
                 cell.select()
                 if selectedEndDate != nil {
-                    cell.highlightRight()
+                    if #available(iOS 9.0, *) {
+                        if UIView.appearance().semanticContentAttribute == .forceRightToLeft{
+                            cell.highlightLeft()
+                        }
+                        else{
+                            cell.highlightRight()
+                        }
+                    } else {
+                        // Use the previous technique
+                        if UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft {
+                            cell.highlightLeft()
+                        }
+                        else{
+                            cell.highlightRight()
+                        }
+                    }
                 }
             } else if selectedEndDate != nil && areSameDay(dateA: date, dateB: selectedEndDate!) {
                 cell.select()
-                cell.highlightLeft()
+                if #available(iOS 9.0, *) {
+                    if UIView.appearance().semanticContentAttribute == .forceRightToLeft{
+                        cell.highlightRight()
+                    }
+                    else{
+                        cell.highlightLeft()
+                    }
+                } else {
+                    // Use the previous technique
+                    if UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft {
+                        cell.highlightRight()
+                    }
+                    else{
+                        cell.highlightLeft()
+                    }
+                }
             }
         }
         return cell

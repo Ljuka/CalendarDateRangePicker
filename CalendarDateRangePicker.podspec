@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name         = "CalendarDateRangePicker"
-  s.version      = "1.3"
+  s.version      = "1.4"
   s.summary      = "A calendar date range picker view controller in Swift for iOS."
 
   s.description  = <<-DESC
