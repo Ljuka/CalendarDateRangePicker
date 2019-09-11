@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol CalendarDateRangePickerViewControllerDelegate {
+public protocol CalendarDateRangePickerViewControllerDelegate: class {
     func didCancelPickingDateRange()
     func didPickDateRange(startDate: Date!, endDate: Date!)
     func didSelectStartDate(startDate: Date!)
@@ -20,7 +20,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     @objc let cellReuseIdentifier = "CalendarDateRangePickerCell"
     @objc let headerReuseIdentifier = "CalendarDateRangePickerHeaderView"
     
-    weak public var delegate: CalendarDateRangePickerViewControllerDelegate!
+    public weak var delegate: CalendarDateRangePickerViewControllerDelegate!
     
     @objc let itemsPerRow = 7
     @objc let itemHeight: CGFloat = 40
