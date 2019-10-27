@@ -2,7 +2,8 @@
 //  AppDelegate.swift
 //  CalendarDateRangePickerViewController
 //
-//  Created by miraan on 10/15/2017.
+//  Created by Miraan on 15/10/2017.
+//  Improved and maintaining by Ljuka
 //  Copyright (c) 2017 miraan. All rights reserved.
 //
 
@@ -43,4 +44,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
