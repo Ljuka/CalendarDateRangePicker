@@ -51,10 +51,16 @@ import UIKit
     public var cancelText = "Cancel"
     public var doneText = "Done"
     public var selectionMode: SelectionMode = .range
-    
+    public var firstDayOfWeek: DayOfWeek = .sunday
+
     @objc public enum SelectionMode: Int {
         case range = 0
         case single = 1
+    }
+    
+    @objc public enum DayOfWeek: Int{
+        case monday = 0
+        case sunday = 1
     }
     
     override public func viewDidLoad() {
@@ -398,6 +404,14 @@ extension CalendarDateRangePickerViewController {
         var components = DateComponents()
         components.calendar = Calendar.current
         components.weekday = weekday
+        if(firstDayOfWeek == .monday) {
+            if(weekday == 7){
+                components.weekday = 1
+            }
+            else {
+                components.weekday = weekday + 1
+            }
+        }
         let date = Calendar.current.nextDate(after: Date(), matching: components, matchingPolicy: Calendar.MatchingPolicy.strict)
         if date == nil {
             return "E"
@@ -408,7 +422,18 @@ extension CalendarDateRangePickerViewController {
     }
 
     @objc func getWeekday(date: Date) -> Int {
-        return Calendar.current.dateComponents([.weekday], from: date).weekday!
+        let weekday = Calendar.current.dateComponents([.weekday], from: date).weekday!
+        if(firstDayOfWeek == .monday) {
+            if(weekday == 1){
+                return 7
+            }
+            else {
+                return weekday - 1
+            }
+        }
+        else {
+            return weekday
+        }
     }
 
     @objc func getNumberOfDaysInMonth(date: Date) -> Int {
