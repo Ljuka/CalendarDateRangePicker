@@ -84,7 +84,13 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         }
         delegate.didPickDateRange(startDate: selectedStartDate!, endDate: selectedEndDate!)
     }
-
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if selectedStartDate != nil{
+            self.scrollToSelection()
+        }
+    }
 }
 
 extension CalendarDateRangePickerViewController {
@@ -302,7 +308,68 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
 extension CalendarDateRangePickerViewController {
 
     // Helper functions
-
+    
+    private func scrollToSelection(){
+        if let uCollectionView = collectionView{
+            let sections = uCollectionView.numberOfSections
+            
+            for section in 0..<sections {
+                
+                let items = uCollectionView.numberOfItems(inSection: section)
+                for item in 0..<items {
+                    let indexPath = IndexPath(item: item, section: section)
+                    
+                    if isDayItem(at: indexPath) && isDaySelected(at: indexPath) {
+                        self.selectedStartCell = indexPath
+                        collectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredVertically, animated: false)
+                        return
+                    }
+                }
+            }
+        }
+    }
+    
+    func isCellBlank(at indexPath: IndexPath) -> Bool {
+        let blankItems = getWeekday(date: getFirstDateForSection(section: indexPath.section)) - 1
+        if indexPath.item >= 7 && indexPath.item < 7 + blankItems {
+            return true
+        }
+        
+        return false
+    }
+    
+    func isWeekDayLabel(at indexPath: IndexPath) -> Bool {
+        if indexPath.item < 7{
+            return true
+        }
+        
+        return false
+    }
+    
+    func isDayItem(at indexPath: IndexPath) -> Bool {
+        if !isCellBlank(at: indexPath) && !isWeekDayLabel(at: indexPath){
+            return true
+        }
+        
+        return false
+    }
+    
+    func isDaySelected(at indexPath: IndexPath) -> Bool {
+        let blankItems = getWeekday(date: getFirstDateForSection(section: indexPath.section)) - 1
+        let dayOfMonth = indexPath.item - (7 + blankItems) + 1
+        let date = getDate(dayOfMonth: dayOfMonth, section: indexPath.section)
+        
+        if selectedStartDate != nil && selectedEndDate != nil && isBefore(dateA: selectedStartDate!, dateB: date) && isBefore(dateA: date, dateB: selectedEndDate!) {
+            return true
+        } else if selectedStartDate != nil && areSameDay(dateA: date, dateB: selectedStartDate!) {
+            return true
+        } else if selectedEndDate != nil && areSameDay(dateA: date, dateB: selectedEndDate!) {
+            return true
+        }
+        
+        return false
+    }
+    
     @objc func getFirstDate() -> Date {
         var components = Calendar.current.dateComponents([.month, .year], from: minimumDate)
         components.day = 1
