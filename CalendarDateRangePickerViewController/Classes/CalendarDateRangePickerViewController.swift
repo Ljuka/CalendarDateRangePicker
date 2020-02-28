@@ -29,6 +29,7 @@ import UIKit
 
     public var minimumDate: Date!
     public var maximumDate: Date!
+    public var locale: Locale?
 
     public var selectedStartDate: Date?
     public var selectedEndDate: Date?
@@ -350,7 +351,8 @@ extension CalendarDateRangePickerViewController {
     @objc func getMonthLabel(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
-        return dateFormatter.string(from: date)
+        if let locale = locale {dateFormatter.locale = locale}
+        return dateFormatter.string(from: date).capitalized
     }
 
     @objc func getWeekdayLabel(weekday: Int) -> String {
@@ -371,7 +373,8 @@ extension CalendarDateRangePickerViewController {
         }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEEE"
-        return dateFormatter.string(from: date!)
+        if let locale = locale {dateFormatter.locale = locale}
+        return dateFormatter.string(from: date!).uppercased()
     }
 
     @objc func getWeekday(date: Date) -> Int {
