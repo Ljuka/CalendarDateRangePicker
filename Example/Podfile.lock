@@ -1,16 +1,16 @@
 PODS:
-  - CalendarDateRangePicker (1.0)
+  - CalendarDateRangePicker (1.8)
 
 DEPENDENCIES:
   - CalendarDateRangePicker
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - CalendarDateRangePicker
 
 SPEC CHECKSUMS:
-  CalendarDateRangePicker: 16708d89fa135ff5d1ebb9ff7b4d295c59799567
+  CalendarDateRangePicker: d2f09466501a6fe53124f353c494a5a9e036d87c
 
 PODFILE CHECKSUM: d2ffe4695b1f1dd50aa1a70159a6da3443427fe2
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.9.1

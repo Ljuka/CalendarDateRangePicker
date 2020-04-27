@@ -332,7 +332,7 @@ extension CalendarDateRangePickerViewController {
             if let date = self.selectedStartDate {
                 let calendar = Calendar.current
                 let yearDiff = calendar.component(.year, from: date) - calendar.component(.year, from: minimumDate)
-                let selectedMonth = calendar.component(.month, from: date) + yearDiff * 12
+                let selectedMonth = calendar.component(.month, from: date) + yearDiff * 12 - (calendar.component(.month, from: Date()) + yearDiff * 12)
                 uCollectionView.scrollToItem(at: IndexPath(row: calendar.component(.day, from: date), section: selectedMonth - 1), at: UICollectionView.ScrollPosition.centeredVertically, animated: false)
             }
         }
