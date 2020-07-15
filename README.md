@@ -1,8 +1,8 @@
 # CalendarDateRangePickerViewController
 
-[![Version](https://img.shields.io/cocoapods/v/CalendarDateRangePickerViewController.svg?style=flat)](http://cocoapods.org/pods/CalendarDateRangePicker)
-[![License](https://img.shields.io/cocoapods/l/CalendarDateRangePickerViewController.svg?style=flat)](http://cocoapods.org/pods/CalendarDateRangePicker)
-[![Platform](https://img.shields.io/cocoapods/p/CalendarDateRangePickerViewController.svg?style=flat)](http://cocoapods.org/pods/CalendarDateRangePicker)
+[![Version](https://img.shields.io/cocoapods/v/CalendarDateRangePicker.svg?style=flat)](http://cocoapods.org/pods/CalendarDateRangePicker)
+[![License](https://img.shields.io/cocoapods/l/CalendarDateRangePickerViewController.svg?style=flat)](https://github.com/Ljuka/CalendarDateRangePicker/blob/master/LICENSE)
+[![Platform](https://img.shields.io/cocoapods/p/CalendarDateRangePickerViewController.svg?style=flat)](#)
 
 ## Example
 
