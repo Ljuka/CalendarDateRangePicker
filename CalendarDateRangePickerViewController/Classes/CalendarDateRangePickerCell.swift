@@ -19,7 +19,8 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
             label?.font = font
         }
     }
-
+    
+    @objc var todaySelectedColor: UIColor!
     @objc var selectedColor: UIColor!
     @objc var selectedLabelColor: UIColor!
     @objc var highlightedLabelColor: UIColor!
@@ -27,6 +28,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
     @objc var disabledTimestampDates: [Int]?
     @objc var date: Date?
     @objc var selectedView: UIView?
+    @objc var todayView: UIView?
     @objc var halfBackgroundView: UIView?
     @objc var roundHighlightView: UIView?
 
@@ -58,6 +60,10 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         if selectedView != nil {
             selectedView?.removeFromSuperview()
             selectedView = nil
+        }
+        if todayView != nil {
+            todayView?.removeFromSuperview()
+            todayView = nil
         }
         if halfBackgroundView != nil {
             halfBackgroundView?.removeFromSuperview()
@@ -124,7 +130,18 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
 
     @objc func disable() {
         label.textColor = disabledColor
-
+    }
+    
+    @objc func selectToday() {
+        let width = self.frame.size.width
+        let height = self.frame.size.height
+        todayView = UIView(frame: CGRect(x: (width - height) / 2, y: 0, width: height, height: height))
+        todayView?.backgroundColor = .clear
+        todayView?.layer.borderColor = todaySelectedColor.cgColor
+        todayView?.layer.borderWidth = 1
+        todayView?.layer.cornerRadius = height / 2
+        self.addSubview(todayView!)
+        self.sendSubviewToBack(todayView!)
     }
 
 }

@@ -205,12 +205,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 3PFT3Q8CHG;
+						DevelopmentTeam = FWF9YK9JFB;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 3PFT3Q8CHG;
+						DevelopmentTeam = FWF9YK9JFB;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -449,11 +449,11 @@
 			baseConfigurationReference = 863F34A79DF14110025EE9E4 /* Pods-CalendarDateRangePickerViewController_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3PFT3Q8CHG;
+				DEVELOPMENT_TEAM = FWF9YK9JFB;
 				INFOPLIST_FILE = CalendarDateRangePickerViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.miraan.CalendarDateRangePickerViewController-Ljuka";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ljuka.CalendarDateRangePickerViewController-Ljuka";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -465,11 +465,11 @@
 			baseConfigurationReference = C9304EBA1ACFB048B6759598 /* Pods-CalendarDateRangePickerViewController_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3PFT3Q8CHG;
+				DEVELOPMENT_TEAM = FWF9YK9JFB;
 				INFOPLIST_FILE = CalendarDateRangePickerViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.miraan.CalendarDateRangePickerViewController-Ljuka";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ljuka.CalendarDateRangePickerViewController-Ljuka";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -479,7 +479,7 @@
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 3PFT3Q8CHG;
+				DEVELOPMENT_TEAM = FWF9YK9JFB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -501,7 +501,7 @@
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 3PFT3Q8CHG;
+				DEVELOPMENT_TEAM = FWF9YK9JFB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

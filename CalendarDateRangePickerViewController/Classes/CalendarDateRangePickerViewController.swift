@@ -33,6 +33,7 @@ import UIKit
 
     public var selectedStartDate: Date?
     public var selectedEndDate: Date?
+    public var scrollToDate: Date?
     var selectedStartCell: IndexPath?
     var selectedEndCell: IndexPath?
 
@@ -44,7 +45,7 @@ import UIKit
     public var cellFont: UIFont = UIFont(name: "HelveticaNeue", size: CalendarDateRangePickerViewController.defaultCellFontSize)!
     public var headerFont: UIFont = UIFont(name: "HelveticaNeue-Light", size: CalendarDateRangePickerViewController.defaultHeaderFontSize)!
 
-
+    public var todaySelectedColor = UIColor.systemBlue
     public var selectedColor = UIColor(red: 66 / 255.0, green: 150 / 255.0, blue: 240 / 255.0, alpha: 1.0)
     public var selectedLabelColor = UIColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: 1.0)
     public var highlightedLabelColor = UIColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: 1.0)
@@ -53,7 +54,13 @@ import UIKit
     public var doneText = "Done"
     public var selectionMode: SelectionMode = .range
     public var firstDayOfWeek: DayOfWeek = .sunday
+    public var navigationTitleFont: UIFont = UIFont.systemFont(ofSize: 18.0)
+    public var navigationLeftItemFont: UIFont = UIFont.systemFont(ofSize: 17.0)
+    public var navigationRightItemFont: UIFont = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
 
+    private let dateFormatter = DateFormatter()
+    private var nowDatePreFormatted = ""
+    
     @objc public enum SelectionMode: Int {
         case range = 0
         case single = 1
@@ -66,7 +73,10 @@ import UIKit
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-
+       
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        self.nowDatePreFormatted = dateFormatter.string(from: Date())
+        
         self.title = self.titleText
 
         collectionView?.dataSource = self
@@ -90,6 +100,11 @@ import UIKit
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: cancelText, style: .plain, target: self, action: #selector(CalendarDateRangePickerViewController.didTapCancel))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: doneText, style: .done, target: self, action: #selector(CalendarDateRangePickerViewController.didTapDone))
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: navigationTitleFont]
+        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: navigationLeftItemFont], for: .normal)
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: navigationRightItemFont], for: .normal)
+        
         self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
     }
 
@@ -106,7 +121,7 @@ import UIKit
 
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if selectedStartDate != nil {
+        if selectedStartDate != nil || scrollToDate != nil {
             self.scrollToSelection()
         }
     }
@@ -133,6 +148,7 @@ extension CalendarDateRangePickerViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! CalendarDateRangePickerCell
 
         cell.highlightedColor = self.cellHighlightedColor
+        cell.todaySelectedColor = self.todaySelectedColor
         cell.selectedColor = self.selectedColor
         cell.selectedLabelColor = self.selectedLabelColor
         cell.highlightedLabelColor = self.highlightedLabelColor
@@ -152,7 +168,6 @@ extension CalendarDateRangePickerViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let datePreFormatted = dateFormatter.string(from: date)
-            let dateFormatted = dateFormatter.date(from: datePreFormatted)
 
             if disabledDates != nil {
                 if (disabledDates?.contains(cell.date!))! {
@@ -162,7 +177,11 @@ extension CalendarDateRangePickerViewController {
             if isBefore(dateA: date, dateB: minimumDate) {
                 cell.disable()
             }
-
+            
+            if self.nowDatePreFormatted == datePreFormatted{
+                cell.selectToday()
+            }
+            
             if selectedStartDate != nil && selectedEndDate != nil && isBefore(dateA: selectedStartDate!, dateB: date) && isBefore(dateA: date, dateB: selectedEndDate!) {
                 // Cell falls within selected range
                 if dayOfMonth == 1 {
@@ -332,8 +351,14 @@ extension CalendarDateRangePickerViewController {
             if let date = self.selectedStartDate {
                 let calendar = Calendar.current
                 let yearDiff = calendar.component(.year, from: date) - calendar.component(.year, from: minimumDate)
-                let selectedMonth = calendar.component(.month, from: date) + yearDiff * 12 - (calendar.component(.month, from: Date()) + yearDiff * 12)
-                uCollectionView.scrollToItem(at: IndexPath(row: calendar.component(.day, from: date), section: selectedMonth - 1), at: UICollectionView.ScrollPosition.centeredVertically, animated: false)
+                let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: Date()))
+                uCollectionView.scrollToItem(at: IndexPath(row: calendar.component(.day, from: date), section: selectedMonth), at: UICollectionView.ScrollPosition.centeredVertically, animated: false)
+            }
+            else if let date = self.scrollToDate {
+                let calendar = Calendar.current
+                let yearDiff = calendar.component(.year, from: date) - calendar.component(.year, from: minimumDate)
+                let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: Date()))
+                uCollectionView.scrollToItem(at: IndexPath(row: calendar.component(.day, from: date), section: selectedMonth), at: UICollectionView.ScrollPosition.centeredVertically, animated: false)
             }
         }
     }
@@ -415,7 +440,7 @@ extension CalendarDateRangePickerViewController {
         if disabledDates == nil {
             return false
         }
-
+        
         var index = startDateCellIndex.row
         var section = startDateCellIndex.section
         var currentIndexPath: IndexPath
