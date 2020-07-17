@@ -15,7 +15,6 @@ Here's what it looks like:
 ## Usage
 
 It's as simple as:
-
 ```swift
 let dateRangePickerViewController = CalendarDateRangePickerViewController(collectionViewLayout: UICollectionViewFlowLayout())
 dateRangePickerViewController.delegate = self
@@ -24,7 +23,6 @@ self.navigationController?.present(navigationController, animated: true, complet
 ```
 
 Just implement the delegate methods:
-
 ```swift
 protocol CalendarDateRangePickerViewControllerDelegate {
     func didCancelPickingDateRange()
@@ -33,7 +31,6 @@ protocol CalendarDateRangePickerViewControllerDelegate {
 ```
 
 You can also set additional options to override the defaults:
-
 ```swift
 dateRangePickerViewController.minimumDate = Date()
 dateRangePickerViewController.maximumDate = Calendar.current.date(byAdding: .year, value: 2, to: Date())
@@ -41,6 +38,25 @@ dateRangePickerViewController.selectedStartDate = Date()
 dateRangePickerViewController.selectedEndDate = Calendar.current.date(byAdding: .day, value: 10, to: Date())
 dateRangePickerViewController.selectedColor = UIColor.red
 dateRangePickerViewController.titleText = "Select Date Range"
+```
+
+Set font for navigation items:
+```swift
+dateRangePickerViewController.navigationTitleFont = UIFont(name: "HelveticaNeue-Light", size: 20)!
+dateRangePickerViewController.navigationLeftItemFont = UIFont(name: "HelveticaNeue-Light", size: 20)!
+dateRangePickerViewController.navigationRightItemFont = UIFont(name: "HelveticaNeue-Light", size: 20)!
+```
+
+If you need you can scroll to a specific date without selecting any:
+```swift
+dateRangePickerViewController.scrollToDate = Calendar.current.date(byAdding: .month, value: 3, to: Date())
+```
+
+And set array of disabled dates:
+```swift
+let dateFormatter = DateFormatter()
+dateFormatter.dateFormat = "yyyy-MM-dd"
+dateRangePickerViewController.disabledDates = [dateFormatter.date(from: "2018-11-13"), dateFormatter.date(from: "2018-11-21")] as? [Date]
 ```
 
 ## Installation
