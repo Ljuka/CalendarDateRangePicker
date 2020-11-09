@@ -105,7 +105,7 @@ import UIKit
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: navigationLeftItemFont], for: .normal)
         self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: navigationRightItemFont], for: .normal)
         
-        self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
+        self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil || selectedEndDate != nil
     }
 
     @objc func didTapCancel() {
@@ -113,8 +113,14 @@ import UIKit
     }
 
     @objc func didTapDone() {
-        if selectedStartDate == nil || selectedEndDate == nil {
+        if selectedStartDate == nil && selectedEndDate == nil {
             return
+        } else {
+            if selectedStartDate == nil {
+                return
+            } else {
+                selectedEndDate = selectedStartDate
+            }
         }
         delegate.didPickDateRange(startDate: selectedStartDate!, endDate: selectedEndDate!)
     }
