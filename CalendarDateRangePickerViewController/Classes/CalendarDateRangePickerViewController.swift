@@ -126,8 +126,10 @@ import UIKit
 
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if selectedStartDate != nil || scrollToDate != nil {
-            self.scrollToSelection()
+        DispatchQueue.main.async { [weak self] in
+            if self?.selectedStartDate != nil || self?.scrollToDate != nil {
+                self?.scrollToSelection()
+            }
         }
     }
 }
@@ -356,13 +358,13 @@ extension CalendarDateRangePickerViewController {
             if let date = self.selectedStartDate {
                 let calendar = Calendar.current
                 let yearDiff = calendar.component(.year, from: date) - calendar.component(.year, from: minimumDate)
-                let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: Date()))
+                let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: minimumDate))
                 uCollectionView.scrollToItem(at: IndexPath(row: calendar.component(.day, from: date), section: selectedMonth), at: UICollectionView.ScrollPosition.centeredVertically, animated: false)
             }
             else if let date = self.scrollToDate {
                 let calendar = Calendar.current
                 let yearDiff = calendar.component(.year, from: date) - calendar.component(.year, from: minimumDate)
-                let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: Date()))
+                let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: minimumDate))
                 uCollectionView.scrollToItem(at: IndexPath(row: calendar.component(.day, from: date), section: selectedMonth), at: UICollectionView.ScrollPosition.centeredVertically, animated: false)
             }
         }
