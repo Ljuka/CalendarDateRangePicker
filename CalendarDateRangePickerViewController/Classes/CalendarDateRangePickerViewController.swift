@@ -25,7 +25,7 @@ import UIKit
 
     let itemsPerRow = 7
     let itemHeight: CGFloat = 40
-    let collectionViewInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    var collectionViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
     public var minimumDate: Date!
     public var maximumDate: Date!
@@ -43,7 +43,7 @@ import UIKit
     public static let defaultCellFontSize: CGFloat = 15.0
     public static let defaultHeaderFontSize: CGFloat = 17.0
     public var cellFont: UIFont = UIFont(name: "HelveticaNeue", size: CalendarDateRangePickerViewController.defaultCellFontSize)!
-    public var headerFont: UIFont = UIFont(name: "HelveticaNeue-Light", size: CalendarDateRangePickerViewController.defaultHeaderFontSize)!
+    public var headerFont: UIFont = UIFont(name: "HelveticaNeue-Medium", size: CalendarDateRangePickerViewController.defaultHeaderFontSize)!
 
     public var todaySelectedColor = UIColor.systemBlue
     public var selectedColor = UIColor(red: 66 / 255.0, green: 150 / 255.0, blue: 240 / 255.0, alpha: 1.0)
@@ -87,8 +87,11 @@ import UIKit
             collectionView?.backgroundColor = UIColor.white
         }
 
+        let rounded = CGFloat(roundToClosestMultipleNumber(Int(view.frame.width), 7))
+
         collectionView?.register(CalendarDateRangePickerCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         collectionView?.register(CalendarDateRangePickerHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        collectionViewInsets = UIEdgeInsets(top: 0, left: (view.frame.width - rounded) / 2, bottom: 0, right: (view.frame.width - rounded) / 2)
         collectionView?.contentInset = collectionViewInsets
 
         if minimumDate == nil {
@@ -105,7 +108,7 @@ import UIKit
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: navigationLeftItemFont], for: .normal)
         self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: navigationRightItemFont], for: .normal)
         
-        self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
+        self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil || selectedEndDate != nil
     }
 
     @objc func didTapCancel() {
@@ -113,11 +116,12 @@ import UIKit
     }
 
     @objc func didTapDone() {
-
         if selectedStartDate == nil && selectedEndDate == nil {
             return
         } else {
-            if selectedEndDate == nil {
+            if selectedStartDate == nil {
+                return
+            } else {
                 selectedEndDate = selectedStartDate
             }
         }
@@ -126,11 +130,23 @@ import UIKit
 
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DispatchQueue.main.async { [weak self] in
-            if self?.selectedStartDate != nil || self?.scrollToDate != nil {
-                self?.scrollToSelection()
+        if selectedStartDate != nil || scrollToDate != nil {
+            self.scrollToSelection()
+        }
+    }
+
+    func roundToClosestMultipleNumber(_ numberOne: Int, _ numberTwo: Int) -> Int {
+        var result: Int = numberOne
+
+        if numberOne % numberTwo != 0 {
+            if numberOne < numberTwo {
+                result = numberTwo
+            } else {
+                result = (numberOne / numberTwo + 1) * numberTwo
             }
         }
+
+        return result
     }
 }
 
@@ -358,13 +374,13 @@ extension CalendarDateRangePickerViewController {
             if let date = self.selectedStartDate {
                 let calendar = Calendar.current
                 let yearDiff = calendar.component(.year, from: date) - calendar.component(.year, from: minimumDate)
-                let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: minimumDate))
+                let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: Date()))
                 uCollectionView.scrollToItem(at: IndexPath(row: calendar.component(.day, from: date), section: selectedMonth), at: UICollectionView.ScrollPosition.centeredVertically, animated: false)
             }
             else if let date = self.scrollToDate {
                 let calendar = Calendar.current
                 let yearDiff = calendar.component(.year, from: date) - calendar.component(.year, from: minimumDate)
-                let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: minimumDate))
+                let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: Date()))
                 uCollectionView.scrollToItem(at: IndexPath(row: calendar.component(.day, from: date), section: selectedMonth), at: UICollectionView.ScrollPosition.centeredVertically, animated: false)
             }
         }
