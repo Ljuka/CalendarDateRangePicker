@@ -25,7 +25,7 @@ import UIKit
 
     let itemsPerRow = 7
     let itemHeight: CGFloat = 40
-    let collectionViewInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    var collectionViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
     public var minimumDate: Date!
     public var maximumDate: Date!
@@ -43,7 +43,7 @@ import UIKit
     public static let defaultCellFontSize: CGFloat = 15.0
     public static let defaultHeaderFontSize: CGFloat = 17.0
     public var cellFont: UIFont = UIFont(name: "HelveticaNeue", size: CalendarDateRangePickerViewController.defaultCellFontSize)!
-    public var headerFont: UIFont = UIFont(name: "HelveticaNeue-Light", size: CalendarDateRangePickerViewController.defaultHeaderFontSize)!
+    public var headerFont: UIFont = UIFont(name: "HelveticaNeue-Medium", size: CalendarDateRangePickerViewController.defaultHeaderFontSize)!
 
     public var todaySelectedColor = UIColor.systemBlue
     public var selectedColor = UIColor(red: 66 / 255.0, green: 150 / 255.0, blue: 240 / 255.0, alpha: 1.0)
@@ -87,8 +87,11 @@ import UIKit
             collectionView?.backgroundColor = UIColor.white
         }
 
+        let rounded = CGFloat(roundToClosestMultipleNumber(Int(view.frame.width), 7))
+
         collectionView?.register(CalendarDateRangePickerCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         collectionView?.register(CalendarDateRangePickerHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        collectionViewInsets = UIEdgeInsets(top: 0, left: (view.frame.width - rounded) / 2, bottom: 0, right: (view.frame.width - rounded) / 2)
         collectionView?.contentInset = collectionViewInsets
 
         if minimumDate == nil {
@@ -130,6 +133,20 @@ import UIKit
         if selectedStartDate != nil || scrollToDate != nil {
             self.scrollToSelection()
         }
+    }
+
+    func roundToClosestMultipleNumber(_ numberOne: Int, _ numberTwo: Int) -> Int {
+        var result: Int = numberOne
+
+        if numberOne % numberTwo != 0 {
+            if numberOne < numberTwo {
+                result = numberTwo
+            } else {
+                result = (numberOne / numberTwo + 1) * numberTwo
+            }
+        }
+
+        return result
     }
 }
 

@@ -31,10 +31,10 @@
 /* Begin PBXFileReference section */
 		0F24A8E020617172A25A9725A31D9076 /* CalendarDateRangePicker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = CalendarDateRangePicker.modulemap; sourceTree = "<group>"; };
 		122FA17E2E803AA915BCD3F3B8357143 /* Pods-CalendarDateRangePickerViewController_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CalendarDateRangePickerViewController_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		2C20EC88C91DDA32E2154CA918BE54B3 /* Pods_CalendarDateRangePickerViewController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CalendarDateRangePickerViewController_Example.framework; path = "Pods-CalendarDateRangePickerViewController_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C20EC88C91DDA32E2154CA918BE54B3 /* Pods_CalendarDateRangePickerViewController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalendarDateRangePickerViewController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		301124A93918BC6969EE134CE46243D3 /* CalendarDateRangePickerViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CalendarDateRangePickerViewController.swift; path = CalendarDateRangePickerViewController/Classes/CalendarDateRangePickerViewController.swift; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		37EE20B1A76383A3ED024936F58B2212 /* CalendarDateRangePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CalendarDateRangePicker.framework; path = CalendarDateRangePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EE20B1A76383A3ED024936F58B2212 /* CalendarDateRangePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CalendarDateRangePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		384E8167A1343A97446EE6AAE9B97C70 /* CalendarDateRangePicker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CalendarDateRangePicker-dummy.m"; sourceTree = "<group>"; };
 		3B438E6390F084CDC634B61FC0085A51 /* Pods-CalendarDateRangePickerViewController_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CalendarDateRangePickerViewController_Example-umbrella.h"; sourceTree = "<group>"; };
 		467379C3FDFF1F7C404E2C8F1462B9EF /* CalendarDateRangePickerCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CalendarDateRangePickerCell.swift; path = CalendarDateRangePickerViewController/Classes/CalendarDateRangePickerCell.swift; sourceTree = "<group>"; };
@@ -44,7 +44,7 @@
 		78C1ED1254B4862185D6792AD7FD2D62 /* CalendarDateRangePicker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CalendarDateRangePicker-umbrella.h"; sourceTree = "<group>"; };
 		7E94F2A439F239B4EE578BDA725FE9E1 /* CalendarDateRangePicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CalendarDateRangePicker.debug.xcconfig; sourceTree = "<group>"; };
 		973BBD4CF05198A6B261E94382B1FBFD /* Pods-CalendarDateRangePickerViewController_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CalendarDateRangePickerViewController_Example-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A53CD83C5EFF61A6B426DA402A34C2DD /* Pods-CalendarDateRangePickerViewController_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CalendarDateRangePickerViewController_Example.modulemap"; sourceTree = "<group>"; };
 		A8ACE815BB3E47621B81FD43AC3424D6 /* CalendarDateRangePicker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CalendarDateRangePicker-prefix.pch"; sourceTree = "<group>"; };
 		ACE33FFEA696398477C68162E315B8BF /* CalendarDateRangePicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CalendarDateRangePicker.release.xcconfig; sourceTree = "<group>"; };
@@ -108,7 +108,6 @@
 				301124A93918BC6969EE134CE46243D3 /* CalendarDateRangePickerViewController.swift */,
 				DD46B74BD1B11CD7787FA09FBD3C2071 /* Support Files */,
 			);
-			name = CalendarDateRangePicker;
 			path = CalendarDateRangePicker;
 			sourceTree = "<group>";
 		};
@@ -489,8 +488,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
