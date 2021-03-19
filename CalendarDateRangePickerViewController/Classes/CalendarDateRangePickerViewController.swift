@@ -168,11 +168,11 @@ extension CalendarDateRangePickerViewController {
             if isBefore(dateA: date, dateB: minimumDate) {
                 cell.disable()
             }
-            
+
             if self.nowDatePreFormatted == datePreFormatted{
                 cell.selectToday()
             }
-            
+
             if selectedStartDate != nil && selectedEndDate != nil && isBefore(dateA: selectedStartDate!, dateB: date) && isBefore(dateA: date, dateB: selectedEndDate!) {
                 // Cell falls within selected range
                 if dayOfMonth == 1 {
@@ -192,6 +192,8 @@ extension CalendarDateRangePickerViewController {
                             cell.highlightRight()
                         }
                     }
+                    // Case where range date is on 2 months
+                    cell.setBlackBoldFont()
                 } else if dayOfMonth == getNumberOfDaysInMonth(date: date) {
                     if #available(iOS 9.0, *) {
                         if UIView.appearance().semanticContentAttribute == .forceRightToLeft {
@@ -209,6 +211,8 @@ extension CalendarDateRangePickerViewController {
                             cell.highlightLeft()
                         }
                     }
+                    // Case where range date is on 2 months
+                    cell.setBlackBoldFont()
                 } else {
                     cell.highlight()
                 }

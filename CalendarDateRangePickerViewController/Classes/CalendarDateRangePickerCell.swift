@@ -19,7 +19,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
             label?.font = font
         }
     }
-    
+
     @objc var todaySelectedColor: UIColor!
     @objc var selectedColor: UIColor!
     @objc var selectedLabelColor: UIColor!
@@ -81,6 +81,8 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         selectedView = UIView(frame: CGRect(x: (width - height) / 2, y: 0, width: height, height: height))
         selectedView?.backgroundColor = selectedColor
         selectedView?.layer.cornerRadius = height / 2
+        label.textColor = highlightedLabelColor
+        label.font = .boldSystemFont(ofSize: 15.0)
         self.addSubview(selectedView!)
         self.sendSubviewToBack(selectedView!)
     }
@@ -93,8 +95,6 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         halfBackgroundView?.backgroundColor = highlightedColor
         self.addSubview(halfBackgroundView!)
         self.sendSubviewToBack(halfBackgroundView!)
-        label.textColor = highlightedLabelColor
-        label.font = UIFont.boldSystemFont(ofSize: 15.0)
         addRoundHighlightView()
     }
 
@@ -106,8 +106,6 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         halfBackgroundView?.backgroundColor = highlightedColor
         self.addSubview(halfBackgroundView!)
         self.sendSubviewToBack(halfBackgroundView!)
-        label.textColor = highlightedLabelColor
-        label.font = UIFont.boldSystemFont(ofSize: 15.0)
         addRoundHighlightView()
     }
 
@@ -123,14 +121,18 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
 
     @objc func highlight() {
         self.backgroundColor = highlightedColor
-        label.textColor = UIColor.black
-        label.font = UIFont.boldSystemFont(ofSize: 16.0)
+        setBlackBoldFont()
+    }
+
+    @objc func setBlackBoldFont() {
+        label.textColor = .black
+        label.font = .boldSystemFont(ofSize: 15.0)
     }
 
     @objc func disable() {
         label.textColor = disabledColor
     }
-    
+
     @objc func selectToday() {
         let width = self.frame.size.width
         let height = self.frame.size.height
