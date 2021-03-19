@@ -43,7 +43,6 @@ class ViewController: UIViewController {
         dateRangePickerViewController.selectedColor = UIColor(hex: 0x008ad7)
         dateRangePickerViewController.todaySelectedColor = UIColor(hex: 0x008ad7)
         dateRangePickerViewController.cellHighlightedColor = UIColor(hex: 0xD1E7F5)
-        dateRangePickerViewController.titleText = "Select Date Range"
 
         containerView.layer.masksToBounds = true
 

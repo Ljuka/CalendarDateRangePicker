@@ -10,8 +10,6 @@
 import UIKit
 
 @objc public protocol CalendarDateRangePickerViewControllerDelegate: class {
-    func didCancelPickingDateRange()
-    func didPickDateRange(startDate: Date!, endDate: Date!)
     func didSelectStartDate(startDate: Date!)
     func didSelectEndDate(endDate: Date!)
 }
@@ -49,9 +47,6 @@ import UIKit
     public var selectedColor = UIColor(red: 66 / 255.0, green: 150 / 255.0, blue: 240 / 255.0, alpha: 1.0)
     public var selectedLabelColor = UIColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: 1.0)
     public var highlightedLabelColor = UIColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: 1.0)
-    public var titleText = "Select Dates"
-    public var cancelText = "Cancel"
-    public var doneText = "Done"
     public var selectionMode: SelectionMode = .range
     public var firstDayOfWeek: DayOfWeek = .sunday
     public var navigationTitleFont: UIFont = UIFont.systemFont(ofSize: 18.0)
@@ -76,8 +71,7 @@ import UIKit
        
         dateFormatter.dateFormat = "yyyy-MM-dd"
         self.nowDatePreFormatted = dateFormatter.string(from: Date())
-        
-        self.title = self.titleText
+
 
         collectionView?.dataSource = self
         collectionView?.delegate = self
@@ -100,32 +94,6 @@ import UIKit
         if maximumDate == nil {
             maximumDate = Calendar.current.date(byAdding: .year, value: 3, to: minimumDate)
         }
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: cancelText, style: .plain, target: self, action: #selector(CalendarDateRangePickerViewController.didTapCancel))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: doneText, style: .done, target: self, action: #selector(CalendarDateRangePickerViewController.didTapDone))
-        
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: navigationTitleFont]
-        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: navigationLeftItemFont], for: .normal)
-        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: navigationRightItemFont], for: .normal)
-        
-        self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil || selectedEndDate != nil
-    }
-
-    @objc func didTapCancel() {
-        delegate.didCancelPickingDateRange()
-    }
-
-    @objc func didTapDone() {
-        if selectedStartDate == nil && selectedEndDate == nil {
-            return
-        } else {
-            if selectedStartDate == nil {
-                return
-            } else {
-                selectedEndDate = selectedStartDate
-            }
-        }
-        delegate.didPickDateRange(startDate: selectedStartDate!, endDate: selectedEndDate!)
     }
 
     public override func viewWillAppear(_ animated: Bool) {
