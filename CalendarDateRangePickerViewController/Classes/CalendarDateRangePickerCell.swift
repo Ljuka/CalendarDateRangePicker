@@ -19,6 +19,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
             label?.font = font
         }
     }
+    var highlightedFont = UIFont(name: "HelveticaNeue-Bold", size: CalendarDateRangePickerViewController.defaultCellFontSize)
 
     @objc var todaySelectedColor: UIColor!
     @objc var selectedColor: UIColor!
@@ -82,7 +83,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         selectedView?.backgroundColor = selectedColor
         selectedView?.layer.cornerRadius = height / 2
         label.textColor = highlightedLabelColor
-        label.font = .boldSystemFont(ofSize: 15.0)
+        label.font = highlightedFont
         self.addSubview(selectedView!)
         self.sendSubviewToBack(selectedView!)
     }
@@ -126,7 +127,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
 
     @objc func setBlackBoldFont() {
         label.textColor = .black
-        label.font = .boldSystemFont(ofSize: 15.0)
+        label.font = highlightedFont
     }
 
     @objc func disable() {

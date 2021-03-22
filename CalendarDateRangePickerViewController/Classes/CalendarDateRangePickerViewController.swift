@@ -42,6 +42,7 @@ import UIKit
     public static let defaultHeaderFontSize: CGFloat = 17.0
     public var cellFont: UIFont = UIFont(name: "HelveticaNeue", size: CalendarDateRangePickerViewController.defaultCellFontSize)!
     public var headerFont: UIFont = UIFont(name: "HelveticaNeue-Medium", size: CalendarDateRangePickerViewController.defaultHeaderFontSize)!
+    public var highlightedFont = UIFont(name: "HelveticaNeue-Bold", size: CalendarDateRangePickerViewController.defaultCellFontSize)!
 
     public var todaySelectedColor = UIColor.systemBlue
     public var selectedColor = UIColor(red: 66 / 255.0, green: 150 / 255.0, blue: 240 / 255.0, alpha: 1.0)
@@ -151,6 +152,7 @@ extension CalendarDateRangePickerViewController {
         cell.selectedLabelColor = self.selectedLabelColor
         cell.highlightedLabelColor = self.highlightedLabelColor
         cell.font = self.cellFont
+        cell.highlightedFont = self.highlightedFont
         cell.reset()
         let blankItems = getWeekday(date: getFirstDateForSection(section: indexPath.section)) - 1
         if indexPath.item < 7 {
