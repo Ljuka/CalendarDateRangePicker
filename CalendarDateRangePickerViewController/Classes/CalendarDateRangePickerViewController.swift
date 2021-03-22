@@ -55,7 +55,7 @@ import UIKit
 
     private let dateFormatter = DateFormatter()
     private var nowDatePreFormatted = ""
-    private var needsScroll = false
+    private var needsScrolling = false
     
     @objc public enum SelectionMode: Int {
         case range = 0
@@ -99,13 +99,13 @@ import UIKit
 
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        needsScroll = selectedStartDate != nil || scrollToDate != nil
+        needsScrolling = selectedStartDate != nil || scrollToDate != nil
     }
 
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if needsScroll {
-            needsScroll = false
+        if needsScrolling {
+            needsScrolling = false
             scrollToSelection()
         }
     }
