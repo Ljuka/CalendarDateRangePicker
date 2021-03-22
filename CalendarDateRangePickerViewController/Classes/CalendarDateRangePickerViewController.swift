@@ -119,24 +119,10 @@ import UIKit
 
     private func configureCollectionViewInsets() {
         // In order to fix the bug where some spacing appears between cells
-        let rounded = CGFloat(roundToClosestMultipleNumber(Int(view.frame.width), 7))
-        collectionViewInsets = UIEdgeInsets(top: 0, left: abs(view.frame.width - rounded) / 2, bottom: 0, right: abs(view.frame.width - rounded) / 2)
+        let padding = (view.frame.width.truncatingRemainder(dividingBy: 7)) / 2
+        collectionViewInsets = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
         collectionView?.contentInset = collectionViewInsets
         collectionView.collectionViewLayout.invalidateLayout()
-    }
-
-    func roundToClosestMultipleNumber(_ numberOne: Int, _ numberTwo: Int) -> Int {
-        var result: Int = numberOne
-
-        if numberOne % numberTwo != 0 {
-            if numberOne < numberTwo {
-                result = numberTwo
-            } else {
-                result = (numberOne / numberTwo + 1) * numberTwo
-            }
-        }
-
-        return result
     }
 }
 
