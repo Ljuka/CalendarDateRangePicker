@@ -83,12 +83,9 @@ import UIKit
             collectionView?.backgroundColor = UIColor.white
         }
 
-        let rounded = CGFloat(roundToClosestMultipleNumber(Int(view.frame.width), 7))
-
         collectionView?.register(CalendarDateRangePickerCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         collectionView?.register(CalendarDateRangePickerHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
-        collectionViewInsets = UIEdgeInsets(top: 0, left: (view.frame.width - rounded) / 2, bottom: 0, right: (view.frame.width - rounded) / 2)
-        collectionView?.contentInset = collectionViewInsets
+        configureCollectionViewInsets()
 
         if minimumDate == nil {
             minimumDate = Date()
@@ -103,12 +100,29 @@ import UIKit
         needsScrolling = selectedStartDate != nil || scrollToDate != nil
     }
 
+    public override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        if needsScrolling {
+            // Needed when showing from an iPad
+            // Because we are having a preferredContentSize on the form sheet
+            configureCollectionViewInsets()
+        }
+    }
+
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if needsScrolling {
             needsScrolling = false
             scrollToSelection()
         }
+    }
+
+    private func configureCollectionViewInsets() {
+        // In order to fix the bug where some spacing appears between cells
+        let rounded = CGFloat(roundToClosestMultipleNumber(Int(view.frame.width), 7))
+        collectionViewInsets = UIEdgeInsets(top: 0, left: abs(view.frame.width - rounded) / 2, bottom: 0, right: abs(view.frame.width - rounded) / 2)
+        collectionView?.contentInset = collectionViewInsets
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 
     func roundToClosestMultipleNumber(_ numberOne: Int, _ numberTwo: Int) -> Int {
