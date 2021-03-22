@@ -55,6 +55,7 @@ import UIKit
 
     private let dateFormatter = DateFormatter()
     private var nowDatePreFormatted = ""
+    private var needsScroll = false
     
     @objc public enum SelectionMode: Int {
         case range = 0
@@ -98,8 +99,14 @@ import UIKit
 
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if selectedStartDate != nil || scrollToDate != nil {
-            self.scrollToSelection()
+        needsScroll = selectedStartDate != nil || scrollToDate != nil
+    }
+
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if needsScroll {
+            needsScroll = false
+            scrollToSelection()
         }
     }
 
@@ -343,13 +350,13 @@ extension CalendarDateRangePickerViewController {
     // Helper functions
     private func scrollToSelection() {
         if let uCollectionView = collectionView {
-            if let date = self.selectedStartDate {
+            if let date = self.scrollToDate {
                 let calendar = Calendar.current
                 let yearDiff = calendar.component(.year, from: date) - calendar.component(.year, from: minimumDate)
                 let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: Date()))
                 uCollectionView.scrollToItem(at: IndexPath(row: calendar.component(.day, from: date), section: selectedMonth), at: UICollectionView.ScrollPosition.centeredVertically, animated: false)
             }
-            else if let date = self.scrollToDate {
+            else if let date = self.selectedStartDate {
                 let calendar = Calendar.current
                 let yearDiff = calendar.component(.year, from: date) - calendar.component(.year, from: minimumDate)
                 let selectedMonth = calendar.component(.month, from: date) + (yearDiff * 12) - (calendar.component(.month, from: Date()))
