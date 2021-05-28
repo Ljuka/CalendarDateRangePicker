@@ -350,7 +350,7 @@ extension CalendarDateRangePickerViewController: UICollectionViewDelegateFlowLay
 extension CalendarDateRangePickerViewController {
 
     // Helper functions
-    private func scrollToSelection() {
+    public func scrollToSelection() {
         if let uCollectionView = collectionView {
             if let date = self.scrollToDate {
                 let calendar = Calendar.current
