@@ -381,7 +381,7 @@ extension CalendarDateRangePickerViewController {
 
     @objc func getMonthLabel(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM yyyy"
+        dateFormatter.setLocalizedDateFormatFromTemplate("MMMM yyyy")
         if let locale = locale {dateFormatter.locale = locale}
         return dateFormatter.string(from: date).capitalized
     }
@@ -403,7 +403,7 @@ extension CalendarDateRangePickerViewController {
             return "E"
         }
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEEE"
+        dateFormatter.setLocalizedDateFormatFromTemplate("EEEEE")
         if let locale = locale {dateFormatter.locale = locale}
         return dateFormatter.string(from: date!).uppercased()
     }
